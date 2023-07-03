@@ -1,0 +1,6 @@
+server:
+  port: ${sp.login}
+spring:
+  application:
+    name: ${sn.login}
+

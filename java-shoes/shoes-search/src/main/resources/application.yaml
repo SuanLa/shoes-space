@@ -1,0 +1,6 @@
+server:
+  port: ${sp.search}
+spring:
+  application:
+    name: ${sn.search}
+

@@ -1,0 +1,5 @@
+server:
+  port: ${sp.cart}
+spring:
+  application:
+    name: ${sn.cart}

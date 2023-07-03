@@ -1,0 +1,6 @@
+server:
+  port: ${sp.products}
+spring:
+  application:
+    name: ${sn.products}
+
