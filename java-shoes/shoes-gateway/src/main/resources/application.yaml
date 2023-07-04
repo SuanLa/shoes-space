@@ -3,4 +3,10 @@ server:
 spring:
   application:
     name: ${sn.gateway}
-
+  cloud:
+    gateway:
+      router:
+        - id: oauth-filter
+          uri: http://localhost:21000
+          predicates:
+          - Path=/user/**
