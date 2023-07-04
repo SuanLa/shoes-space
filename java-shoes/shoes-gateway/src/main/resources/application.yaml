@@ -6,7 +6,32 @@ spring:
   cloud:
     gateway:
       router:
-        - id: oauth-filter
-          uri: http://localhost:21000
+        - id: oauth-router
+          uri: lb://${sn.gateway}
           predicates:
           - Path=/user/**
+
+        - id: login-router
+          uri: lb://${sn.login}
+          predicates:
+            - Path=/login/**
+
+        - id: cart-router
+          uri: lb://${sn.cart}
+          predicates:
+            - Path=/cart/**
+
+        - id: products-router
+          uri: lb://${sn.products}
+          predicates:
+            - Path=/products/**
+
+        - id: search-router
+          uri: lb://${sn.search}
+          predicates:
+            - Path=/search/**
+
+        - id: payment-router
+          uri: lb://${sn.payment}
+          predicates:
+            - Path=/payment/**
