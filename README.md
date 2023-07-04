@@ -7,4 +7,4 @@ ff-shoes项目是一套鞋城系统，包括前台商城系统及后台管理系
 
 ### 系统架构图
 
-![img.png](document\system-architecture\img.png)
+![img.png](.\document\system-architecture\img.png)
