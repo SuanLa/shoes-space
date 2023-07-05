@@ -6,7 +6,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.11</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
+        <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
     <artifactId>java-shoes</artifactId>
@@ -22,6 +23,7 @@
         <module>shoes-products</module>
         <module>shoes-common</module>
         <module>shoes-payment</module>
+        <module>shoes-authorization</module>
     </modules>
     <properties>
         <java.version>11</java.version>
@@ -46,7 +48,6 @@
         <mysql-driver.version>8.0.32</mysql-driver.version>
         <druid.version>1.2.14</druid.version>
         <mybatis.version>2.2.2</mybatis.version>
-        <oauth2.version>0.3.1</oauth2.version>
         <pagehelper.version>5.3.1</pagehelper.version>
         <pagehelper-starter.version>1.4.3</pagehelper-starter.version>
     </properties>
@@ -84,13 +85,6 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- spring-boot-starter-oauth2-authorization-server -->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-oauth2-authorization-server</artifactId>
-                <version>${oauth2.version}</version>
             </dependency>
 
             <!-- spring boot actuator -->
@@ -161,6 +155,7 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
+
             <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>

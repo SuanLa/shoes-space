@@ -6,10 +6,10 @@ spring:
   cloud:
     gateway:
       router:
-        - id: oauth-router
+        - id: authorization-router
           uri: lb://${sn.gateway}
           predicates:
-          - Path=/user/**
+          - Path=/authorization/**
 
         - id: login-router
           uri: lb://${sn.login}
@@ -35,3 +35,14 @@ spring:
           uri: lb://${sn.payment}
           predicates:
             - Path=/payment/**
+secure:
+  # 配置是否开启鉴权
+  openauthorization: false
+  # 配置白名单路径
+  white:
+    urls:
+      - "/actuator/**"
+      - "/authorization/oauth/token"
+      - "/login/auth-login"
+      - "/login/refresh-token"
+      - "/captcha/**"
