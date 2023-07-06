@@ -1,4 +1,4 @@
-package com.shoes.demo.domin.query;
+package com.shoes.demo.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,9 +11,9 @@ import lombok.Data;
  **/
 @AllArgsConstructor
 @Data
-@ApiModel("测试查询")
-public class TestQuery {
+@ApiModel("测试传递")
+public class TestDTO {
 
-    @ApiModelProperty("查询消息")
+    @ApiModelProperty("测试消息")
     private String msg;
 }

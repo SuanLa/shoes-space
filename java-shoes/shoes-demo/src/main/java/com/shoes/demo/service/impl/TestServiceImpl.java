@@ -1,8 +1,7 @@
 package com.shoes.demo.service.impl;
 
-import com.shoes.demo.domin.dto.TestDTO;
-import com.shoes.demo.domin.query.TestQuery;
-import com.shoes.demo.domin.vo.TestVO;
+import com.shoes.demo.domain.query.TestQuery;
+import com.shoes.demo.domain.vo.TestVO;
 import com.shoes.demo.service.TestService;
 import org.springframework.stereotype.Service;
 

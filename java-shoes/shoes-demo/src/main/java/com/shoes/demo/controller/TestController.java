@@ -2,12 +2,11 @@ package com.shoes.demo.controller;
 
 import com.shoes.common.ResultVO;
 import com.shoes.demo.api.TestApis;
-import com.shoes.demo.domin.query.TestQuery;
-import com.shoes.demo.domin.vo.TestVO;
+import com.shoes.demo.domain.query.TestQuery;
+import com.shoes.demo.domain.vo.TestVO;
 import com.shoes.demo.service.TestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

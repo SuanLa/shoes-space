@@ -1,4 +1,4 @@
-package com.shoes.demo.domin.vo;
+package com.shoes.demo.domain.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,9 +11,9 @@ import lombok.Data;
  **/
 @AllArgsConstructor
 @Data
-@ApiModel("测试返回")
-public class TestVO {
+@ApiModel("测试查询")
+public class TestQuery {
 
-    @ApiModelProperty("返回消息")
+    @ApiModelProperty("查询消息")
     private String msg;
 }
