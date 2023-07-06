@@ -1,0 +1,5 @@
+server:
+  port: ${sp.demo}
+spring:
+  application:
+    name: ${sn.demo}

@@ -3,3 +3,7 @@ application:
   version: 1.0.0-SNAPSHOT
   author: Tomcat
 
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

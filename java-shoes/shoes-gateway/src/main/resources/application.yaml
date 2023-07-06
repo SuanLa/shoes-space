@@ -41,6 +41,10 @@ secure:
   # 配置白名单路径
   white:
     urls:
+      - "/swagger**/**"
+      - "/webjars/**"
+      - "/v3/**"
+      - "/doc.html"
       - "/actuator/**"
       - "/authorization/oauth/token"
       - "/login/auth-login"

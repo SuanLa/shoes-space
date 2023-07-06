@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shoes-demo" />
+        <module name="shoes-login" />
+        <module name="shoes-products" />
+        <module name="shoes-gateway" />
+        <module name="shoes-payment" />
+        <module name="shoes-search" />
+        <module name="shoes-common" />
+        <module name="shoes-authorization" />
+        <module name="shoes-cart" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="shoes-authorization" options="-parameters" />
+      <module name="shoes-cart" options="-parameters" />
+      <module name="shoes-common" options="-parameters" />
+      <module name="shoes-demo" options="-parameters" />
+      <module name="shoes-gateway" options="-parameters" />
+      <module name="shoes-login" options="-parameters" />
+      <module name="shoes-payment" options="-parameters" />
+      <module name="shoes-products" options="-parameters" />
+      <module name="shoes-search" options="-parameters" />
+    </option>
+  </component>
+</project>

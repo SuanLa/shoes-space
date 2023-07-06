@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>shoes-payment</artifactId>
+    <artifactId>shoes-demo</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -101,7 +101,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.shoes.payment.PaymentApplication</mainClass>
+                    <mainClass>com.shoes.cart.CartApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
