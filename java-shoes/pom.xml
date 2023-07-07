@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>java-shoes</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
     <packaging>pom</packaging>
     <name>shoes</name>
     <description>shoes</description>
@@ -54,6 +54,7 @@
         <mybatis.version>2.2.2</mybatis.version>
         <pagehelper.version>5.3.1</pagehelper.version>
         <pagehelper-starter.version>1.4.3</pagehelper-starter.version>
+        <rocketmq-client-java-version>5.0.5</rocketmq-client-java-version>
     </properties>
     <dependencies>
         <dependency>
@@ -153,6 +154,13 @@
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-starter-client</artifactId>
                 <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <!--rocketmq-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client-java</artifactId>
+                <version>${rocketmq-client-java-version}</version>
             </dependency>
 
 
@@ -299,7 +307,6 @@
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 

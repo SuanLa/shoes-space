@@ -1,14 +1,4 @@
-import {
-    Box,
-    Button,
-    ButtonGroup,
-    Checkbox,
-    Grid,
-    ListItem,
-    ListItemText,
-    Stack,
-    Typography
-} from "@mui/material";
+import {Box, Button, ButtonGroup, Checkbox, Grid, ListItem, ListItemText, Stack, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {useEffect, useState} from "react";
@@ -76,12 +66,7 @@ export default function CartPage(){
         }
     ]);
 
-    const sum = () => {
-        let money = 0;
-        return arrays.map(array=>(
-            money = money + array.num * array.price
-        ))
-    }
+    const sum = () => 0
 
     return(
         <>

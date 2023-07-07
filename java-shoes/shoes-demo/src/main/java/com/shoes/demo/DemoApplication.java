@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @Author: Tomcat
  * @Date: 2023/7/6
  **/
-@SpringBootApplication(scanBasePackages = "com.shoes.demo")
+@SpringBootApplication
 @EnableDiscoveryClient
 public class DemoApplication {
     public static void main(String[] args) {
