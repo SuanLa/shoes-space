@@ -24,3 +24,14 @@ ribbon:
   ConnectTimeout: 5000  #（默认1s，即1000）请求连接的超时时间
   ReadTimeout: 5000 #（默认1s，即1000）请求处理的超时时间
 
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.shoes.login.entity
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com:
+      shoes:
+        login:
+          mapper : debug

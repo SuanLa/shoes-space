@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shoes.login.mapper.LoginMapper">
+    <resultMap id="LoginType" type="com.shoes.login.entity.LoginEntity">
+        <result column="username" property="username"/>
+        <result column="password" property="passwd"/>
+    </resultMap>
+    
+    <select id="selectById" resultMap="LoginType">
+        select username,password
+        from sys_user
+        where username = #{username}
+    </select>
+</mapper>

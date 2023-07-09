@@ -5,36 +5,38 @@ spring:
     name: ${sn.gateway}
   cloud:
     gateway:
+      default-filters:
+        - AddRequestHeader=gateway-env, springcloud-gateway
       router:
         - id: authorization-router
-          uri: lb://${sn.gateway}
+          uri: lb://${sn.authorization}
           predicates:
           - Path=/authorization/**
 
         - id: login-router
           uri: lb://${sn.login}
           predicates:
-            - Path=/login/**
+          - Path=/admin/**
 
         - id: cart-router
           uri: lb://${sn.cart}
           predicates:
-            - Path=/cart/**
+          - Path=/cart/**
 
         - id: products-router
           uri: lb://${sn.products}
           predicates:
-            - Path=/products/**
+          - Path=/products/**
 
         - id: search-router
           uri: lb://${sn.search}
           predicates:
-            - Path=/search/**
+          - Path=/search/**
 
         - id: payment-router
           uri: lb://${sn.payment}
           predicates:
-            - Path=/payment/**
+          - Path=/payment/**
 secure:
   # 配置是否开启鉴权
   openauthorization: false
@@ -50,3 +52,7 @@ secure:
       - "/login/auth-login"
       - "/login/refresh-token"
       - "/captcha/**"
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG

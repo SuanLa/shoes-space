@@ -3,6 +3,7 @@ import { useState } from 'react';
 // @mui
 import { Container, Stack, Typography } from '@mui/material';
 // components
+import {useNavigate} from "react-router-dom";
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
 import PRODUCTS from '../_mock/products';
@@ -12,6 +13,8 @@ import PRODUCTS from '../_mock/products';
 export default function ProductsPage() {
   const [openFilter, setOpenFilter] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleOpenFilter = () => {
     setOpenFilter(true);
   };
@@ -19,6 +22,10 @@ export default function ProductsPage() {
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
+
+  const pushGetway = () =>{
+    navigate('/dashboard/show');
+  }
 
   return (
     <>
@@ -42,7 +49,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={PRODUCTS} />
+        <ProductList products={PRODUCTS} onClick={pushGetway}/>
         <ProductCartWidget />
       </Container>
     </>

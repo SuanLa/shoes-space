@@ -1,11 +1,11 @@
 package com.shoes.demo.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * @Author: Tomcat
  * @Date: 2023/7/6
  **/
-@Mapper
+@Repository
 public interface TestMapper {
 }

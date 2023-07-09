@@ -27,7 +27,6 @@ public class TestController implements TestApis {
 
     @GetMapping("/one/{query}")
     @ApiOperation("第一个接口")
-    @ResponseBody
     @Override
     public ResultVO<TestVO> test(@PathVariable("query") TestQuery query){
         return ResultVO.success(testService.serv(query));

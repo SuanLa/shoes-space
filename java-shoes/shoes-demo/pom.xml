@@ -6,7 +6,8 @@
     <parent>
         <groupId>com.example</groupId>
         <artifactId>java-shoes</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${project.version}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>shoes-demo</artifactId>

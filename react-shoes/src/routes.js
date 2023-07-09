@@ -10,6 +10,8 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import CartPage from "./pages/Cart";
+// eslint-disable-next-line no-unused-vars
+import ConcreteProduct from "./pages/ConcreteProduct";
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +25,8 @@ export default function Router() {
         { path: 'app', element: <DashboardAppPage /> },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
-        { path: 'cart',element: <CartPage/>}
+        { path: 'cart',element: <CartPage/>},
+        { path: 'show',element: <ConcreteProduct/>}
       ],
     },
     {
