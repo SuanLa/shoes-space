@@ -97,7 +97,6 @@ export default function LoginPage() {
                 OR
               </Typography>
             </Divider>
-
             <LoginForm />
           </StyledContent>
         </Container>

@@ -3,8 +3,17 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {useEffect, useState} from "react";
 import '../style/BottomStyle.css';
+import {styled} from "@mui/material/styles";
 
-function Number({number}){
+const StyledProductImg = styled('img')({
+    top: 0,
+    width: '15%',
+    height: '80%',
+    objectFit: 'cover',
+    position: 'absolute',
+});
+
+function Number({number,sum,setSum,price}){
     const [count,setCount] = useState(1)
 
     useEffect(
@@ -26,6 +35,7 @@ function Number({number}){
                             aria-label="increase"
                             onClick={() => {
                                 setCount(count + 1);
+                                setSum(sum+price)
                             }}
                         >
                             <AddIcon fontSize="inherit" />
@@ -35,6 +45,10 @@ function Number({number}){
                             aria-label="reduce"
                             onClick={() => {
                                 setCount(Math.max(count - 1, 0));
+                                if (count!==0)
+                                {
+                                    setSum(sum-price)
+                                }
                             }}
                         >
                             <RemoveIcon fontSize="inherit" />
@@ -51,22 +65,94 @@ export default function CartPage(){
         {
             'id': 1,
             'name': 'Nike Air Force 1 NDESTRUKT',
+            'src': '/assets/images/products/product_1.jpg',
             'price': 100,
             'num': 1
         },{
             'id': 2,
             'name': 'Nike Space Hippie 04',
+            'src': '/assets/images/products/product_2.jpg',
             'price': 200,
             'num': 2
         },{
             'id': 3,
             'name': 'Nike Blazer Low 77 Vintage',
+            'src': '/assets/images/products/product_3.jpg',
+            'price': 300,
+            'num': 2
+        },
+        {
+            'id': 4,
+            'name': 'Nike Air Force 1 NDESTRUKT',
+            'src': '/assets/images/products/product_4.jpg',
+            'price': 100,
+            'num': 1
+        },{
+            'id': 5,
+            'name': 'Nike Space Hippie 04',
+            'src': '/assets/images/products/product_5.jpg',
+            'price': 200,
+            'num': 2
+        },{
+            'id': 6,
+            'name': 'Nike Blazer Low 77 Vintage',
+            'src': '/assets/images/products/product_6.jpg',
+            'price': 300,
+            'num': 2
+        },
+        {
+            'id': 7,
+            'name': 'Nike Air Force 1 NDESTRUKT',
+            'src': '/assets/images/products/product_7.jpg',
+            'price': 100,
+            'num': 1
+        },{
+            'id': 8,
+            'name': 'Nike Space Hippie 04',
+            'src': '/assets/images/products/product_8.jpg',
+            'price': 200,
+            'num': 2
+        },{
+            'id': 9,
+            'name': 'Nike Blazer Low 77 Vintage',
+            'src': '/assets/images/products/product_9.jpg',
+            'price': 300,
+            'num': 2
+        },
+        {
+            'id': 10,
+            'name': 'Nike Air Force 1 NDESTRUKT',
+            'src': '/assets/images/products/product_10.jpg',
+            'price': 100,
+            'num': 1
+        },{
+            'id': 11,
+            'name': 'Nike Space Hippie 04',
+            'src': '/assets/images/products/product_11.jpg',
+            'price': 200,
+            'num': 2
+        },{
+            'id': 12,
+            'name': 'Nike Blazer Low 77 Vintage',
+            'src': '/assets/images/products/product_12.jpg',
             'price': 300,
             'num': 2
         }
     ]);
 
-    const sum = () => 0
+    const [sum,setSum] = useState(0);
+
+    useEffect(
+        ()=>{
+            let cal = 0;
+            arrays.reduce(product=> {
+                // eslint-disable-next-line no-return-assign
+                return cal += product.num * product.price
+            })
+            setSum(cal)
+        },[]
+    )
+
 
     return(
         <>
@@ -76,16 +162,19 @@ export default function CartPage(){
                         arrays.map(array=>(
                                 <ListItem key={array.id}>
                                     <Grid xs={1}>
-                                        <Checkbox/>
-                                    </Grid>
-                                    <Grid xs={4}>
-                                        <ListItemText>{array.name}</ListItemText>
+                                        <Checkbox indeterminate/>
                                     </Grid>
                                     <Grid xs={3}>
+                                        <StyledProductImg alt={array.name} src={array.src} />
+                                    </Grid>
+                                    <Grid xs={2}>
+                                        <ListItemText>{array.name}</ListItemText>
+                                    </Grid>
+                                    <Grid xs={2}>
                                         <ListItemText>${array.price}</ListItemText>
                                     </Grid>
                                     <Grid xs={3}>
-                                        <Number number={array.num}/>
+                                        <Number number={array.num} sum={sum} setSum={setSum} price={array.price}/>
                                     </Grid>
                                     <Grid sx={1}>
                                         <Button variant="contained" size='small' onClick={()=>{

@@ -1,4 +1,11 @@
 .footers{
+    position: fixed;
+    left: 21%;
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
+}
+
+.postage {
+    position: fixed;
+    bottom: 10%;
 }

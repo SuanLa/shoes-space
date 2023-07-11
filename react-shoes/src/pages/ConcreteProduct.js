@@ -1,7 +1,10 @@
 import {Helmet} from "react-helmet-async";
-import {Card, CardContent, CardMedia, Container, Typography} from "@mui/material";
+import {Button, Card, CardContent, CardMedia, Container, Typography} from "@mui/material";
+import {useState} from "react";
+import "../style/BottomStyle.css";
 
-export default function ConcreteProduct({data}){
+export default function ConcreteProduct(){
+    const [data,setData] = useState(100)
 
     return(
         <>
@@ -25,6 +28,12 @@ export default function ConcreteProduct({data}){
                         </Typography>
                     </CardContent>
                 </Card>
+                <Container>
+                    <Typography variant='button'>价格: ${data}</Typography>
+                </Container>
+                <Container>
+                    <Button variant="contained" size='large'>加入购物车</Button>
+                </Container>
             </Container>
         </>
     )
