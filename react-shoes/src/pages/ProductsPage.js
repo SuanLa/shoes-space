@@ -23,7 +23,7 @@ export default function ProductsPage() {
     setOpenFilter(false);
   };
 
-  const pushGetway = () =>{
+  const pushGateway = () =>{
     navigate('/dashboard/show');
   }
 
@@ -49,7 +49,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={PRODUCTS} onClick={pushGetway}/>
+        <ProductList products={PRODUCTS} onClick={pushGateway}/>
         <ProductCartWidget />
       </Container>
     </>

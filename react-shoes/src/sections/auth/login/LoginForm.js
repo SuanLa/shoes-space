@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
+import axios from "axios";
 import Iconify from '../../../components/iconify';
 
 // ----------------------------------------------------------------------
@@ -13,14 +14,27 @@ export default function LoginForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const [form,setForm] = useState({username:null,password:null})
+
   const handleClick = () => {
-    navigate('/dashboard', { replace: true });
+    // navigate('/dashboard', { replace: true });
+      axios.post('http://localhost:21000/admin/login',{
+          username: form.username,
+          password: form.password
+      }).then((response) => {
+
+          if (response.data.code===0){
+              navigate('/dashboard/app')
+          }
+      }).catch((error) =>{
+          console.log(error);
+      })
   };
 
   return (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField name="username" label="username" onChange={(u)=>setForm({...form,username: u.target.value})}/>
 
         <TextField
           name="password"
@@ -35,6 +49,7 @@ export default function LoginForm() {
               </InputAdornment>
             ),
           }}
+          onChange={(p)=>setForm({...form, password: p.target.value})}
         />
       </Stack>
 
