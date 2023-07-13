@@ -48,7 +48,7 @@ public class ElasticSearchController implements ElasticSearchApis {
         return ResultVO.success(service.queryByName(query));
     }
 
-    @GetMapping("/query")
+    @GetMapping("/queryByPage")
     @ApiOperation("分页查询接口")
     @Override
     public ResultVO<PageVO<Page<ElasticSearchVO>>> queryByPage(ElasticSearchPageQuery pageQuery) {

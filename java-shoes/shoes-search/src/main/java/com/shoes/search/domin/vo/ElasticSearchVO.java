@@ -21,4 +21,16 @@ public class ElasticSearchVO {
 
     @ApiModelProperty("产品描述")
     private String productDescription;
+
+    @ApiModelProperty("产品价格")
+    private String productPrice;
+
+    @ApiModelProperty("产品数量")
+    private int productNumber;
+
+    @ApiModelProperty("产品图片路径")
+    private String productImg;
+
+    @ApiModelProperty("产品删除")
+    private int productDelete;
 }

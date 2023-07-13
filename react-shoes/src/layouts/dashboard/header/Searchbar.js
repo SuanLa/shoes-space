@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener } from '@mui/material';
 // utils
+import axios from "axios";
 import { bgBlur } from '../../../utils/cssStyles';
 // component
 import Iconify from '../../../components/iconify';
@@ -35,11 +36,23 @@ const StyledSearchbar = styled('div')(({ theme }) => ({
 export default function Searchbar() {
   const [open, setOpen] = useState(false);
 
+  const [search,setSearch] = useState(null);
+
+  function srch(){
+    axios.get('/search/queryByPage').then
+    ((response) => {
+        }).catch((error) =>{
+      console.log(error);
+    })
+  }
+  
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const handleClose = () => {
+    srch()
+    navigator('/dashboard/products')
     setOpen(false);
   };
 

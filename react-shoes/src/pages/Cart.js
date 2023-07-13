@@ -10,7 +10,7 @@ const QuantityContainer = styled(Grid)(({ theme }) => ({
     alignItems: "center",
     gap: theme.spacing(0.2),
 }));
-function Number({ number, updateNumber }) {
+function Number({ number, updateNumber,id ,remove}) {
     const [count, setCount] = useState(1);
 
     useEffect(() => {
@@ -23,6 +23,9 @@ function Number({ number, updateNumber }) {
     };
 
     const handleReduce = () => {
+        if (number===1){
+            remove(id)
+        }
         setCount(Math.max(count - 1, 0));
         updateNumber(Math.max(count - 1, 0));
     };
@@ -95,7 +98,7 @@ export default function CartPage() {
                                 <ListItemText>￥{array.price}</ListItemText>
                             </Grid>
                             <Grid xs={3}>
-                                <Number number={array.num} updateNumber={(num) => {
+                                <Number number={array.num} id={array.id} remove={handleRemoveItem} updateNumber={(num) => {
                                     const updatedArrays = arrays.map(a => {
                                         if (a.id === array.id) {
                                             return { ...a, num };
@@ -117,7 +120,7 @@ export default function CartPage() {
                     <Checkbox />
                 </Grid>
                 <Grid item xs={6} lg={4}>
-                    <Typography variant="button">合计: {calculateTotal()}</Typography>
+                    <Typography variant="button">合计: {calculateTotal}</Typography>
                 </Grid>
                 <Grid item xs={2} lg={4}>
                     <Button variant="contained" color="info" onClick={handleCheckout}>
