@@ -87,7 +87,7 @@ export default function Nav({ openNav, onCloseNav }) {
         </Link>
       </Box>
 
-      <NavSection data={login('user')} />
+      <NavSection data={login('admin')} />
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>
