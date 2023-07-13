@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Grid, ListItem, ListItemText } from "@mui/material";
+import {Box, Button, Checkbox, Grid, ListItem, ListItemText, Typography} from "@mui/material";
 import { useEffect, useState } from "react";
 import {styled} from "@mui/material/styles";
 
@@ -13,35 +13,26 @@ export default function Order() {
         {
             id: 1,
             name: '这是一双你买了绝对不会后悔的鞋',
-            customerId: '张三的油纸伞',
-            orderDate: '2023-07-13',
             totalAmount: 500,
             status: '未支付',
-            address: '提瓦特大陆',
         },
         {
             id: 2,
             name: '白露牌香奈儿鞋，闻着香，脚不臭',
-            customerId: '张三的油纸伞',
-            orderDate: '2023-6-21',
             totalAmount: 300,
             status: '已支付',
-            address: '星际和平公司',
         },
         {
             id: 3,
             name: '长城牌大力足球鞋，大力，就是牛',
-            customerId: '张三的油纸伞',
-            orderDate: '2023-05-20',
             totalAmount: 700,
             status: '已支付',
-            address: '黑塔空间站',
         },
         // 如果需要，可以添加更多订单
     ]);
 
     const [editAddress, setEditAddress] = useState(false);
-    const [addressValue, setAddressValue] = useState('');
+    const [addressValue, setAddressValue] = useState('越越の奶茶店');
     const [editOrderId, setEditOrderId] = useState(null);
     const handleRemoveItem = (id) => {
         setOrders(orders.filter(order => order.id !== id));
@@ -52,7 +43,7 @@ export default function Order() {
         setEditOrderId(order.id);
     };
 
-    const handleAddressSave = (order) => {
+    const handleAddressSave = () => {
         setEditAddress(false);
         // 更新订单地址
         const updatedOrders = orders.map(order => {
@@ -73,87 +64,54 @@ export default function Order() {
     const calculateTotal = () => {
         let total = 0;
         orders.forEach(order => {
-            total += order.num * order.price;
+            total += order.totalAmount;
         });
         return total;
     };
 
+
     return (
-        <>
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={0}>
-                    <ListItem>
-                        <Grid item xs={2.5}>
-                            <ListItemText>商品名称</ListItemText>
-                        </Grid>
-                        <Grid item xs={1.7}>
-                            <ListItemText>用户ID</ListItemText>
-                        </Grid>
-                        <Grid item xs={1.5}>
-                            <ListItemText>下单时间</ListItemText>
-                        </Grid>
-                        <Grid item xs={1.7}>
-                            <ListItemText>￥价格</ListItemText>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <ListItemText>订单地址</ListItemText>
-                        </Grid>
-                    </ListItem>
-                    {orders.map(order => (
-                        <ListItem key={order.id}>
-                            <Grid item xs={3}>
-                                <ListItemText>{order.name}</ListItemText>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ListItemText>{order.customerId}</ListItemText>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ListItemText>{order.orderDate}</ListItemText>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ListItemText>￥{order.totalAmount}</ListItemText>
-                            </Grid>
-                            <Grid item xs={3}>
-                                {editAddress && editOrderId === order.id ? (
-                                    <>
-                                        <input
-                                            type="text"
-                                            value={addressValue}
-                                            onChange={e => setAddressValue(e.target.value)}
-                                        />
-                                        <Button variant="contained" size="small" onClick={handleAddressSave}>
-                                            确认
-                                        </Button>
-                                    </>
-                                ) : (
-                                    <ListItemText>{order.address}</ListItemText>
-                                )}
-                            </Grid>
-                            <Grid item xs={1}>
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    onClick={() => handleAddressEdit(order)}
-                                >
-                                    修改地址
-                                </Button>
-                            </Grid>
-                            <Grid item xs={1}>
-                                {order.status === '未支付' && (
-                                    <Button variant="contained" size="small" onClick={() => handlePayment(order)}>
-                                        支付
-                                    </Button>
-                                )}
-                            </Grid>
-                            <Grid item xs={1}>
-                                <Button variant="contained" size="small" onClick={() => handleRemoveItem(order.id)}>
-                                    ×
-                                </Button>
-                            </Grid>
-                        </ListItem>
-                    ))}
-                </Grid>
+        <Box>
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                {editAddress ? (
+                    <Box display="flex" alignItems="center">
+                        <input
+                            type="text"
+                            value={addressValue}
+                            onChange={(e) => setAddressValue(e.target.value)}
+                        />
+                        <Button variant="contained" onClick={handleAddressSave}>
+                            保存
+                        </Button>
+                    </Box>
+                ) : (
+                    <Box display="flex" alignItems="center">
+                        <Typography variant="body1">
+                            用户地址：{addressValue}
+                        </Typography>
+                        <Button variant="contained" onClick={() => handleAddressEdit(orders[0])}>
+                            编辑地址
+                        </Button>
+                    </Box>
+                )}
             </Box>
-        </>
+
+            <Typography variant="h6">商品名称：</Typography>
+            {orders.map(order => (
+                <ListItem key={order.id}>
+                    <ListItemText primary={order.name} />
+                    <Button variant="contained" onClick={() => handleRemoveItem(order.id)}>
+                        删除
+                    </Button>
+                </ListItem>
+            ))}
+
+            <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+                <Typography variant="h6">总计金额：{calculateTotal()}</Typography>
+                <Button variant="contained" onClick={() => handlePayment(orders[0])}>
+                    提交订单
+                </Button>
+            </Box>
+        </Box>
     );
 }
