@@ -7,10 +7,10 @@ import Iconify from '../../../components/iconify';
 // ----------------------------------------------------------------------
 
 const SORT_BY_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High-Low' },
-  { value: 'priceAsc', label: 'Price: Low-High' },
+  { value: 'featured', label: '默认排序' },
+  { value: 'newest', label: '按上架时间排序' },
+  { value: 'priceDesc', label: '价格从高到低' },
+  { value: 'priceAsc', label: '价格从低到高' },
 ];
 
 export default function ShopProductSort() {
@@ -32,9 +32,9 @@ export default function ShopProductSort() {
         onClick={handleOpen}
         endIcon={<Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />}
       >
-        Sort By:&nbsp;
+          商品展示排序方式：&nbsp;
         <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-          Newest
+            按上架时间排序
         </Typography>
       </Button>
       <Menu

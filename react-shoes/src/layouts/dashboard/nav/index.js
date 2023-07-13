@@ -14,6 +14,8 @@ import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
 //
 import navConfig from './config';
+import navConfig2 from "./config2";
+import navConfig3 from "./config3";
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +41,16 @@ export default function Nav({ openNav, onCloseNav }) {
 
   const isDesktop = useResponsive('up', 'lg');
 
+  const login = function (auth){
+    if (auth === 'user'){
+      return navConfig2;
+    }
+    if(auth === 'manager'){
+      return navConfig3;
+    }
+    return navConfig;
+
+  }
   useEffect(() => {
     if (openNav) {
       onCloseNav();
@@ -75,7 +87,7 @@ export default function Nav({ openNav, onCloseNav }) {
         </Link>
       </Box>
 
-      <NavSection data={navConfig} />
+      <NavSection data={login('user')} />
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>

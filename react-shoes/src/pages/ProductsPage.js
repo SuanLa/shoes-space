@@ -23,19 +23,19 @@ export default function ProductsPage() {
     setOpenFilter(false);
   };
 
-  const pushGateway = () =>{
+  const pushGetway = () =>{
     navigate('/dashboard/show');
   }
 
   return (
     <>
       <Helmet>
-        <title> Dashboard: Products | Minimal UI </title>
+        <title> 越越の奇妙鞋城 </title>
       </Helmet>
 
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
+          以下是越越の奇妙鞋城的所有商品展示
         </Typography>
 
         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
@@ -49,7 +49,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={PRODUCTS} onClick={pushGateway}/>
+        <ProductList products={PRODUCTS} onClick={pushGetway}/>
         <ProductCartWidget />
       </Container>
     </>

@@ -28,13 +28,13 @@ export const SORT_BY_OPTIONS = [
   { value: 'priceDesc', label: 'Price: High-Low' },
   { value: 'priceAsc', label: 'Price: Low-High' },
 ];
-export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const FILTER_CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
+export const FILTER_GENDER_OPTIONS = ['男人', '女人', '小孩'];
+export const FILTER_CATEGORY_OPTIONS = ['凉鞋', '拖鞋', '运动鞋', '皮鞋'];
 export const FILTER_RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
 export const FILTER_PRICE_OPTIONS = [
-  { value: 'below', label: 'Below $25' },
-  { value: 'between', label: 'Between $25 - $75' },
-  { value: 'above', label: 'Above $75' },
+  { value: 'below', label: '小于25￥' },
+  { value: 'between', label: '25￥—75￥' },
+  { value: 'above', label: '大于75￥' },
 ];
 export const FILTER_COLOR_OPTIONS = [
   '#00AB55',
@@ -59,7 +59,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
   return (
     <>
       <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
-        Filters&nbsp;
+        筛选商品&nbsp;
       </Button>
 
       <Drawer
@@ -72,7 +72,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ px: 1, py: 2 }}>
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
-            Filters
+            筛选选项
           </Typography>
           <IconButton onClick={onCloseFilter}>
             <Iconify icon="eva:close-fill" />
@@ -85,7 +85,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
           <Stack spacing={3} sx={{ p: 3 }}>
             <div>
               <Typography variant="subtitle1" gutterBottom>
-                Gender
+                人群
               </Typography>
               <FormGroup>
                 {FILTER_GENDER_OPTIONS.map((item) => (
@@ -96,7 +96,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
 
             <div>
               <Typography variant="subtitle1" gutterBottom>
-                Category
+                种类
               </Typography>
               <RadioGroup>
                 {FILTER_CATEGORY_OPTIONS.map((item) => (
@@ -107,7 +107,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
 
             <div>
               <Typography variant="subtitle1" gutterBottom>
-                Colors
+                颜色
               </Typography>
               <ColorMultiPicker
                 name="colors"
@@ -120,7 +120,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
 
             <div>
               <Typography variant="subtitle1" gutterBottom>
-                Price
+                价格
               </Typography>
               <RadioGroup>
                 {FILTER_PRICE_OPTIONS.map((item) => (
@@ -131,7 +131,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
 
             <div>
               <Typography variant="subtitle1" gutterBottom>
-                Rating
+                评分
               </Typography>
               <RadioGroup>
                 {FILTER_RATING_OPTIONS.map((item, index) => (
@@ -171,7 +171,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
             variant="outlined"
             startIcon={<Iconify icon="ic:round-clear-all" />}
           >
-            Clear All
+            重置
           </Button>
         </Box>
       </Drawer>
