@@ -1,6 +1,4 @@
-import { Box, Button, ButtonGroup, Checkbox, Grid, ListItem, ListItemText, Stack, Typography } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { Box, Button, Checkbox, Grid, ListItem, ListItemText } from "@mui/material";
 import { useEffect, useState } from "react";
 import {styled} from "@mui/material/styles";
 
@@ -9,71 +7,73 @@ const QuantityContainer = styled(Grid)(({ theme }) => ({
     alignItems: "center",
     gap: theme.spacing(0.2),
 }));
-function Number({ number, updateNumber }) {
-    const [count, setCount] = useState(1);
-
-    useEffect(() => {
-        setCount(number);
-    }, [number]);
-
-    const handleIncrease = () => {
-        setCount(count + 1);
-        updateNumber(count + 1);
-    };
-
-    const handleReduce = () => {
-        setCount(Math.max(count - 1, 0));
-        updateNumber(Math.max(count - 1, 0));
-    };
-
-    return (
-        <QuantityContainer>
-            <ListItemText>{count}</ListItemText>
-            <Button variant="contained" aria-label="increase" onClick={handleIncrease}>
-                <AddIcon fontSize="inherit" />
-            </Button>
-            <Button variant="contained" aria-label="reduce" onClick={handleReduce}>
-                <RemoveIcon fontSize="inherit" />
-            </Button>
-        </QuantityContainer>
-    );
-}
 
 export default function Order() {
-    const [arrays, setArrays] = useState([
+    const [orders, setOrders] = useState([
         {
-            'id': 1,
-            'name': '长城牌大力足球鞋，大力，就是牛',
-            'price': 100,
-            'num': 1
+            id: 1,
+            name: '这是一双你买了绝对不会后悔的鞋',
+            customerId: '张三的油纸伞',
+            orderDate: '2023-07-13',
+            totalAmount: 500,
+            status: '未支付',
+            address: '提瓦特大陆',
         },
         {
-            'id': 2,
-            'name': '白露牌香奈儿鞋，闻着香，脚不臭',
-            'price': 200,
-            'num': 2
+            id: 2,
+            name: '白露牌香奈儿鞋，闻着香，脚不臭',
+            customerId: '张三的油纸伞',
+            orderDate: '2023-6-21',
+            totalAmount: 300,
+            status: '已支付',
+            address: '星际和平公司',
         },
         {
-            'id': 3,
-            'name': '这是一双你买了绝对不会后悔的鞋',
-            'price': 300,
-            'num': 2
-        }
+            id: 3,
+            name: '长城牌大力足球鞋，大力，就是牛',
+            customerId: '张三的油纸伞',
+            orderDate: '2023-05-20',
+            totalAmount: 700,
+            status: '已支付',
+            address: '黑塔空间站',
+        },
+        // 如果需要，可以添加更多订单
     ]);
 
+    const [editAddress, setEditAddress] = useState(false);
+    const [addressValue, setAddressValue] = useState('');
+    const [editOrderId, setEditOrderId] = useState(null);
     const handleRemoveItem = (id) => {
-        setArrays(arrays.filter(array => array.id !== id));
+        setOrders(orders.filter(order => order.id !== id));
+    };
+    const handleAddressEdit = (order) => {
+        setEditAddress(true);
+        setAddressValue(order.address);
+        setEditOrderId(order.id);
     };
 
-    const handleCheckout = () => {
-        // 实现结算逻辑
-        console.log('进行结算');
+    const handleAddressSave = (order) => {
+        setEditAddress(false);
+        // 更新订单地址
+        const updatedOrders = orders.map(order => {
+            if (order.id === editOrderId) {
+                return { ...order, address: addressValue };
+            }
+            return order;
+        });
+        setOrders(updatedOrders);
+        setEditOrderId(null);
+    };
+
+    const handlePayment = (order) => {
+        // 处理支付逻辑
+        console.log('支付订单', order.id);
     };
 
     const calculateTotal = () => {
         let total = 0;
-        arrays.forEach(array => {
-            total += array.num * array.price;
+        orders.forEach(order => {
+            total += order.num * order.price;
         });
         return total;
     };
@@ -82,30 +82,73 @@ export default function Order() {
         <>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={0}>
-                    {arrays.map(array => (
-                        <ListItem key={array.id}>
-                            <Grid xs={1}>
-                                <Checkbox />
+                    <ListItem>
+                        <Grid item xs={2.5}>
+                            <ListItemText>商品名称</ListItemText>
+                        </Grid>
+                        <Grid item xs={1.7}>
+                            <ListItemText>用户ID</ListItemText>
+                        </Grid>
+                        <Grid item xs={1.5}>
+                            <ListItemText>下单时间</ListItemText>
+                        </Grid>
+                        <Grid item xs={1.7}>
+                            <ListItemText>￥价格</ListItemText>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <ListItemText>订单地址</ListItemText>
+                        </Grid>
+                    </ListItem>
+                    {orders.map(order => (
+                        <ListItem key={order.id}>
+                            <Grid item xs={3}>
+                                <ListItemText>{order.name}</ListItemText>
                             </Grid>
-                            <Grid xs={4}>
-                                <ListItemText>{array.name}</ListItemText>
+                            <Grid item xs={2}>
+                                <ListItemText>{order.customerId}</ListItemText>
                             </Grid>
-                            <Grid xs={3}>
-                                <ListItemText>${array.price}</ListItemText>
+                            <Grid item xs={2}>
+                                <ListItemText>{order.orderDate}</ListItemText>
                             </Grid>
-                            <Grid xs={3}>
-                                <Number number={array.num} updateNumber={(num) => {
-                                    const updatedArrays = arrays.map(a => {
-                                        if (a.id === array.id) {
-                                            return { ...a, num };
-                                        }
-                                        return a;
-                                    });
-                                    setArrays(updatedArrays);
-                                }} />
+                            <Grid item xs={2}>
+                                <ListItemText>￥{order.totalAmount}</ListItemText>
                             </Grid>
-                            <Grid sx={1}>
-                                <Button variant="contained" size='small' onClick={() => handleRemoveItem(array.id)}>×</Button>
+                            <Grid item xs={3}>
+                                {editAddress && editOrderId === order.id ? (
+                                    <>
+                                        <input
+                                            type="text"
+                                            value={addressValue}
+                                            onChange={e => setAddressValue(e.target.value)}
+                                        />
+                                        <Button variant="contained" size="small" onClick={handleAddressSave}>
+                                            确认
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <ListItemText>{order.address}</ListItemText>
+                                )}
+                            </Grid>
+                            <Grid item xs={1}>
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    onClick={() => handleAddressEdit(order)}
+                                >
+                                    修改地址
+                                </Button>
+                            </Grid>
+                            <Grid item xs={1}>
+                                {order.status === '未支付' && (
+                                    <Button variant="contained" size="small" onClick={() => handlePayment(order)}>
+                                        支付
+                                    </Button>
+                                )}
+                            </Grid>
+                            <Grid item xs={1}>
+                                <Button variant="contained" size="small" onClick={() => handleRemoveItem(order.id)}>
+                                    ×
+                                </Button>
                             </Grid>
                         </ListItem>
                     ))}
