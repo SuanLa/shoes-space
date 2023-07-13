@@ -5,201 +5,126 @@ import {useEffect, useState} from "react";
 import '../style/BottomStyle.css';
 import {styled} from "@mui/material/styles";
 
-const StyledProductImg = styled('img')({
-    top: 0,
-    width: '15%',
-    height: '80%',
-    objectFit: 'cover',
-    position: 'absolute',
-});
+const QuantityContainer = styled(Grid)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(0.2),
+}));
+function Number({ number, updateNumber }) {
+    const [count, setCount] = useState(1);
 
-function Number({number,sum,setSum,price}){
-    const [count,setCount] = useState(1)
+    useEffect(() => {
+        setCount(number);
+    }, [number]);
 
-    useEffect(
-        ()=>{
-            setCount(number)
-        },[]
-    )
+    const handleIncrease = () => {
+        setCount(count + 1);
+        updateNumber(count + 1);
+    };
 
-    return(
-        <>
-            <Grid container>
-                <Grid container direction='row' spacing={1}>
-                    <ButtonGroup>
-                        <Grid xs={1}>
-                            <ListItemText>{count}</ListItemText>
-                        </Grid>
-                        <Button
-                            variant='contained'
-                            aria-label="increase"
-                            onClick={() => {
-                                setCount(count + 1);
-                                setSum(sum+price)
-                            }}
-                        >
-                            <AddIcon fontSize="inherit" />
-                        </Button>
-                        <Button
-                            variant='contained'
-                            aria-label="reduce"
-                            onClick={() => {
-                                setCount(Math.max(count - 1, 0));
-                                if (count!==0)
-                                {
-                                    setSum(sum-price)
-                                }
-                            }}
-                        >
-                            <RemoveIcon fontSize="inherit" />
-                        </Button>
-                    </ButtonGroup>
-                </Grid>
-            </Grid>
-        </>
-    )
+    const handleReduce = () => {
+        setCount(Math.max(count - 1, 0));
+        updateNumber(Math.max(count - 1, 0));
+    };
+
+    return (
+        <QuantityContainer>
+            <ListItemText>{count}</ListItemText>
+            <Button variant="contained" aria-label="increase" onClick={handleIncrease}>
+                <AddIcon fontSize="inherit" />
+            </Button>
+            <Button variant="contained" aria-label="reduce" onClick={handleReduce}>
+                <RemoveIcon fontSize="inherit" />
+            </Button>
+        </QuantityContainer>
+    );
 }
 
-export default function CartPage(){
-    const [arrays,setArrays] = useState([
+export default function CartPage() {
+    const [arrays, setArrays] = useState([
         {
             'id': 1,
-            'name': 'Nike Air Force 1 NDESTRUKT',
-            'src': '/assets/images/products/product_1.jpg',
+            'name': '长城牌大力足球鞋，大力，就是牛',
             'price': 100,
             'num': 1
-        },{
+        },
+        {
             'id': 2,
-            'name': 'Nike Space Hippie 04',
-            'src': '/assets/images/products/product_2.jpg',
+            'name': '白露牌香奈儿鞋，闻着香，脚不臭',
             'price': 200,
             'num': 2
-        },{
+        },
+        {
             'id': 3,
-            'name': 'Nike Blazer Low 77 Vintage',
-            'src': '/assets/images/products/product_3.jpg',
-            'price': 300,
-            'num': 2
-        },
-        {
-            'id': 4,
-            'name': 'Nike Air Force 1 NDESTRUKT',
-            'src': '/assets/images/products/product_4.jpg',
-            'price': 100,
-            'num': 1
-        },{
-            'id': 5,
-            'name': 'Nike Space Hippie 04',
-            'src': '/assets/images/products/product_5.jpg',
-            'price': 200,
-            'num': 2
-        },{
-            'id': 6,
-            'name': 'Nike Blazer Low 77 Vintage',
-            'src': '/assets/images/products/product_6.jpg',
-            'price': 300,
-            'num': 2
-        },
-        {
-            'id': 7,
-            'name': 'Nike Air Force 1 NDESTRUKT',
-            'src': '/assets/images/products/product_7.jpg',
-            'price': 100,
-            'num': 1
-        },{
-            'id': 8,
-            'name': 'Nike Space Hippie 04',
-            'src': '/assets/images/products/product_8.jpg',
-            'price': 200,
-            'num': 2
-        },{
-            'id': 9,
-            'name': 'Nike Blazer Low 77 Vintage',
-            'src': '/assets/images/products/product_9.jpg',
-            'price': 300,
-            'num': 2
-        },
-        {
-            'id': 10,
-            'name': 'Nike Air Force 1 NDESTRUKT',
-            'src': '/assets/images/products/product_10.jpg',
-            'price': 100,
-            'num': 1
-        },{
-            'id': 11,
-            'name': 'Nike Space Hippie 04',
-            'src': '/assets/images/products/product_11.jpg',
-            'price': 200,
-            'num': 2
-        },{
-            'id': 12,
-            'name': 'Nike Blazer Low 77 Vintage',
-            'src': '/assets/images/products/product_12.jpg',
+            'name': '这是一双你买了绝对不会后悔的鞋',
             'price': 300,
             'num': 2
         }
     ]);
 
-    const [sum,setSum] = useState(0);
+    const handleRemoveItem = (id) => {
+        setArrays(arrays.filter(array => array.id !== id));
+    };
 
-    useEffect(
-        ()=>{
-            let cal = 0;
-            arrays.reduce(product=> {
-                // eslint-disable-next-line no-return-assign
-                return cal += product.num * product.price
-            })
-            setSum(cal)
-        },[]
-    )
+    const handleCheckout = () => {
+        // 实现结算逻辑
+        console.log('进行结算');
+    };
 
+    const calculateTotal = () => {
+        let total = 0;
+        arrays.forEach(array => {
+            total += array.num * array.price;
+        });
+        return total;
+    };
 
-    return(
+    return (
         <>
-            <Box sx={{flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={0}>
-                    {
-                        arrays.map(array=>(
-                                <ListItem key={array.id}>
-                                    <Grid xs={1}>
-                                        <Checkbox indeterminate/>
-                                    </Grid>
-                                    <Grid xs={3}>
-                                        <StyledProductImg alt={array.name} src={array.src} />
-                                    </Grid>
-                                    <Grid xs={2}>
-                                        <ListItemText>{array.name}</ListItemText>
-                                    </Grid>
-                                    <Grid xs={2}>
-                                        <ListItemText>${array.price}</ListItemText>
-                                    </Grid>
-                                    <Grid xs={3}>
-                                        <Number number={array.num} sum={sum} setSum={setSum} price={array.price}/>
-                                    </Grid>
-                                    <Grid sx={1}>
-                                        <Button variant="contained" size='small' onClick={()=>{
-                                            setArrays(
-                                                arrays.filter(a=> a.id!==array.id)
-                                            )
-                                        }}>×</Button>
-                                    </Grid>
-                                </ListItem>
-                            )
-                        )
-                    }
+                    {arrays.map(array => (
+                        <ListItem key={array.id}>
+                            <Grid xs={1}>
+                                <Checkbox />
+                            </Grid>
+                            <Grid xs={4}>
+                                <ListItemText>{array.name}</ListItemText>
+                            </Grid>
+                            <Grid xs={3}>
+                                <ListItemText>${array.price}</ListItemText>
+                            </Grid>
+                            <Grid xs={3}>
+                                <Number number={array.num} updateNumber={(num) => {
+                                    const updatedArrays = arrays.map(a => {
+                                        if (a.id === array.id) {
+                                            return { ...a, num };
+                                        }
+                                        return a;
+                                    });
+                                    setArrays(updatedArrays);
+                                }} />
+                            </Grid>
+                            <Grid sx={1}>
+                                <Button variant="contained" size='small' onClick={() => handleRemoveItem(array.id)}>×</Button>
+                            </Grid>
+                        </ListItem>
+                    ))}
                 </Grid>
             </Box>
             <Stack direction="row" spacing={2} className='footers'>
-                <Grid xs={4}>
-                    <Checkbox/>
+                <Grid item xs={4}>
+                    <Checkbox />
                 </Grid>
-                <Grid xs={4}>
-                    <Typography variant='button'>合计: {sum}</Typography>
+                <Grid item xs={6} lg={4}>
+                    <Typography variant="button">合计: {calculateTotal()}</Typography>
                 </Grid>
-                <Grid xs={4}>
-                    <Button variant='contained' color='info'>去结算</Button>
+                <Grid item xs={2} lg={4}>
+                    <Button variant="contained" color="info" onClick={handleCheckout}>
+                        去结算
+                    </Button>
                 </Grid>
             </Stack>
         </>
-    )
+    );
 }
