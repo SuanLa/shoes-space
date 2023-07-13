@@ -7,6 +7,7 @@ import com.shoes.login.entity.LoginEntity;
 import com.shoes.login.mapper.LoginMapper;
 import com.shoes.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,9 +18,17 @@ import org.springframework.stereotype.Service;
 public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginMapper loginMapper;
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
     @Override
-    public LoginVO loginSrv(LoginDTO login) {
-        LoginEntity loginEntity = loginMapper.selectById(login.getUsername());
-        return Convert.convert(LoginVO.class, loginEntity);
+    public LoginEntity loginSrv(LoginDTO login) {
+        return loginMapper.selectById(login.getUsername());
+    }
+
+    @Override
+    public LoginEntity logoutSrv(LoginDTO dto) {
+//        redisTemplate.opsForValue().set();
+        return null;
     }
 }

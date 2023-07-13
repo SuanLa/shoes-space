@@ -9,8 +9,9 @@
     </resultMap>
     
     <select id="selectById" resultMap="LoginType">
-        select username,password
-        from sys_user
+        select username,password,role_name
+        from  sys_user_role ur join sys_user u on u.id=ur.user_id
+        join sys_role r on ur.role_id=r.id
         where username = #{username}
     </select>
 </mapper>

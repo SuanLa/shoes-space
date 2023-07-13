@@ -1,10 +1,10 @@
-package com.shoes.login.util;
+package com.shoes.common.util;
 
 import cn.hutool.json.JSONUtil;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
-import com.shoes.login.entity.TokenEntity;
+import com.shoes.common.entity.TokenEntity;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -52,7 +52,6 @@ public class JWTUtil {
             Map<String, Object> stringObjectMap = parseObj.getPayload().toJSONObject();
             System.err.println(stringObjectMap);
         }
-        System.out.println(parseObj);
         return true;
     }
 

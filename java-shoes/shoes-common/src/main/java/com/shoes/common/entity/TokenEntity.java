@@ -1,4 +1,4 @@
-package com.shoes.login.entity;
+package com.shoes.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -4,54 +4,77 @@ spring:
   application:
     name: ${sn.gateway}
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+#    配置跨域
     gateway:
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+##            allowedOrigins: "*"
+#            allowedMethods: "*"
+#            allowedHeaders: "*"
+#            allowCredentials: true
+#        add-to-simple-url-handler-mapping: true
+      discovery:
+        locator:
+          enabled: true  #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+          lower-case-service-id: true
+
       default-filters:
         - AddRequestHeader=gateway-env, springcloud-gateway
-      router:
-        - id: authorization-router
-          uri: lb://${sn.authorization}
-          predicates:
-          - Path=/authorization/**
 
+      routes:
         - id: login-router
           uri: lb://${sn.login}
           predicates:
-          - Path=/admin/**
+            - Path=/admin/**
 
         - id: cart-router
           uri: lb://${sn.cart}
           predicates:
-          - Path=/cart/**
+            - Path=/cart/**
 
         - id: products-router
           uri: lb://${sn.products}
           predicates:
-          - Path=/products/**
+            - Path=/products/**
 
         - id: search-router
           uri: lb://${sn.search}
           predicates:
-          - Path=/search/**
+            - Path=/search/**
 
         - id: payment-router
           uri: lb://${sn.payment}
           predicates:
-          - Path=/payment/**
-secure:
-  # 配置是否开启鉴权
-  openauthorization: false
-  # 配置白名单路径
-  white:
-    urls:
-      - "/swagger**/**"
-      - "/webjars/**"
-      - "/v3/**"
-      - "/doc.html"
-      - "/actuator/**"
-      - "/authorization/oauth/token"
-      - "/login/auth-login"
-      - "/login/refresh-token"
-      - "/captcha/**"
+            - Path=/payment/**
+
+        - id: test-router
+          uri: https://www.baidu.com
+          predicates:
+            - Path=/baidu
+
+    sentinel:
+      transport:
+        dashboard: 114.116.241.169:8849 #配置Sentinel dashboard地址
+      eager: true
+#secure:
+#  # 配置是否开启鉴权
+#  openauthorization: false
+#  # 配置白名单路径
+#  white:
+#    urls:
+#      - "/swagger**/**"
+#      - "/webjars/**"
+#      - "/v3/**"
+#      - "/doc.html"
+#      - "/actuator/**"
+#      - "/authorization/oauth/token"
+#      - "/login/auth-login"
+#      - "/login/refresh-token"
+#      - "/captcha/**"
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG

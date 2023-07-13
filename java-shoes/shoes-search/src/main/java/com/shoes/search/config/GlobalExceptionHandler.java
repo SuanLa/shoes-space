@@ -1,4 +1,4 @@
-package com.shoes.login.config;
+package com.shoes.search.config;
 
 /**
  * @Author: Tomcat

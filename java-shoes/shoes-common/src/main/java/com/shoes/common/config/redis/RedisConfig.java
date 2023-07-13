@@ -1,4 +1,4 @@
-package com.shoes.common.config;
+package com.shoes.common.config.redis;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

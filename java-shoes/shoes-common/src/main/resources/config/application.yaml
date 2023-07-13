@@ -7,3 +7,13 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+management:
+  # 端点检查
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # 健康检查
+  endpoint:
+    health:
+      show-details: always
