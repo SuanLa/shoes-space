@@ -92,7 +92,7 @@ export default function CartPage() {
                                 <ListItemText>{array.name}</ListItemText>
                             </Grid>
                             <Grid xs={3}>
-                                <ListItemText>${array.price}</ListItemText>
+                                <ListItemText>￥{array.price}</ListItemText>
                             </Grid>
                             <Grid xs={3}>
                                 <Number number={array.num} updateNumber={(num) => {
