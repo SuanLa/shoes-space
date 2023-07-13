@@ -1,4 +1,4 @@
-package com.shoes.cart.config;
+package com.shoes.products.config;
 
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import com.shoes.common.config.SwaggerConfig;
@@ -15,14 +15,14 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @Configuration
 @EnableOpenApi
 @EnableSwaggerBootstrapUI
-public class SwaggerInit extends SwaggerConfig{
+public class SwaggerInit extends SwaggerConfig {
 
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.shoes.cart.controller")
+                .apiBasePackage("com.shoes.products.controller")
                 .title("shoes-space系统")
-                .description("购物车模块")
+                .description("商品模块")
                 .contactName("程鸿越")
                 .version("0.0.1-SNAPSHOT")
                 .enableSecurity(true)

@@ -1,6 +1,5 @@
 package com.shoes.login.controller;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;
 import com.nimbusds.jose.JOSEException;
 import com.shoes.common.ResultVO;

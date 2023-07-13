@@ -39,7 +39,7 @@ spring:
         - id: products-router
           uri: lb://${sn.products}
           predicates:
-            - Path=/products/**
+            - Path=/product/**
 
         - id: search-router
           uri: lb://${sn.search}
