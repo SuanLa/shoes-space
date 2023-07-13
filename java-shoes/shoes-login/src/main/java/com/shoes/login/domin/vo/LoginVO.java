@@ -13,9 +13,9 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class LoginVO {
-    @ApiModelProperty(value = "用户名",example = "admin",required = true)
-    private String username;
+    @ApiModelProperty(value = "用户权限",example = "admin",required = true)
+    private String role;
 
-    @ApiModelProperty(value = "是否在线",example = "true",required = true)
-    private boolean online;
+    @ApiModelProperty(value = "token",example = "true",required = true)
+    private String token;
 }

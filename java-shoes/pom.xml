@@ -23,16 +23,15 @@
         <module>shoes-products</module>
         <module>shoes-common</module>
         <module>shoes-payment</module>
-        <module>shoes-authorization</module>
         <module>shoes-demo</module>
     </modules>
     <properties>
         <java.version>11</java.version>
-        <project.version>0.0.1-SNAPSHOT</project.version>
+        <project.version>1.0.0-RELEASE</project.version>
         <captcha.version>1.3.0</captcha.version>
         <apache.common.io.version>1.3.2</apache.common.io.version>
         <easyexcel.version>3.0.5</easyexcel.version>
-        <nimbus-jose-jwt.version>9.31</nimbus-jose-jwt.version>
+        <nimbus-jose-jwt.version>9.11.1</nimbus-jose-jwt.version>
         <hutool.version>5.8.9</hutool.version>
         <spring-boot.version>2.6.11</spring-boot.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>

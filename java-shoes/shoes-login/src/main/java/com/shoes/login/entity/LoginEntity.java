@@ -13,4 +13,6 @@ public class LoginEntity {
     private String username;
 
     private String passwd;
+
+    private String roleName;
 }

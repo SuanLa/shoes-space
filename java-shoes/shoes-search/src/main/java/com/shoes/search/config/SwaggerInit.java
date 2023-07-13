@@ -1,4 +1,4 @@
-package com.shoes.login.config;
+package com.shoes.search.config;
 
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import com.shoes.common.config.SwaggerConfig;
@@ -20,9 +20,9 @@ public class SwaggerInit extends SwaggerConfig{
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.shoes.login.controller")
+                .apiBasePackage("com.shoes.search.controller")
                 .title("shoes-space系统")
-                .description("登录模块")
+                .description("搜索模块")
                 .contactName("Tomcat")
                 .version("0.0.1-SNAPSHOT")
                 .enableSecurity(true)
