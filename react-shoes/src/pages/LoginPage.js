@@ -1,13 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { styled } from '@mui/material/styles';
-import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import backgroundImage from './image/2.jpg';
 import useResponsive from '../hooks/useResponsive';
 import Logo from '../components/logo';
 import Signup from './signup';
-import Iconify from '../components/iconify';
 import LoginForm from '../sections/auth/login/LoginForm';
 
 
@@ -54,10 +53,6 @@ export default function LoginPage() {
       navigate('/dashboard/products', { replace: true });
     }
   }, [isLoggedIn, navigate]);
-  const handleSignupClick = () => {
-    setShowSignup(true);
-    setShowLoginForm(false); // 在点击注册时隐藏LoginForm
-  };
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
@@ -91,15 +86,6 @@ export default function LoginPage() {
                 <>
                   <Typography variant="h4" gutterBottom>
                     <h1>越越の奇妙鞋城</h1>
-                  </Typography>
-
-                  <Typography variant="body2" sx={{ mb: 5 }}>
-                    你是否还没有账号？{' '}
-                    {showLoginForm && (
-                        <Link variant="subtitle2" onClick={handleSignupClick}>
-                          点击注册
-                        </Link>
-                    )}
                   </Typography>
                 </>
             )}

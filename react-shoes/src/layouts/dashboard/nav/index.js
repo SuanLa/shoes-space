@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
@@ -16,6 +16,7 @@ import NavSection from '../../../components/nav-section';
 import navConfig from './config';
 import navConfig2 from "./config2";
 import navConfig3 from "./config3";
+import {UserContext} from "../../../context/System";
 
 // ----------------------------------------------------------------------
 
@@ -41,15 +42,20 @@ export default function Nav({ openNav, onCloseNav }) {
 
   const isDesktop = useResponsive('up', 'lg');
 
-  const login = function (auth){
-    if (auth === 'user'){
+  const [log,setLog] = useRef(UserContext);
+
+  useEffect(()=>{
+    setLog(UserContext)
+  },[UserContext]);
+
+  const login = ()=>{
+    if (log === 'user'){
       return navConfig2;
     }
-    if(auth === 'manager'){
+    if(log === 'admin'){
       return navConfig3;
     }
     return navConfig;
-
   }
   useEffect(() => {
     if (openNav) {
@@ -87,7 +93,7 @@ export default function Nav({ openNav, onCloseNav }) {
         </Link>
       </Box>
 
-      <NavSection data={login('user')} />
+      <NavSection data={login} />
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>

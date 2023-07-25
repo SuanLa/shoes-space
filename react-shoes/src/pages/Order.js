@@ -1,6 +1,7 @@
-import {Box, Button, Checkbox, Grid, ListItem, ListItemText, Typography} from "@mui/material";
-import { useEffect, useState } from "react";
+import {Box, Button, Grid, ListItem, ListItemText, Typography} from "@mui/material";
+import { useState } from "react";
 import {styled} from "@mui/material/styles";
+import "../style/BottomStyle.css";
 
 const QuantityContainer = styled(Grid)(({ theme }) => ({
     display: "flex",
@@ -106,7 +107,7 @@ export default function Order() {
                 </ListItem>
             ))}
 
-            <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" mt={2} className='footers'>
                 <Typography variant="h6">总计金额：{calculateTotal()}</Typography>
                 <Button variant="contained" onClick={() => handlePayment(orders[0])}>
                     提交订单

@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import {useContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../../components/iconify';
+import {UserContext} from "../../../context/System";
 
 export default function LoginForm({ onLogin }) {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [usr,setUsr] = useState({username:null,password:null});
 
-    const handleClick = async () => {
-        const response = await loginUser();
+    const handleClick = () => {
+        // const response = await loginUser();
+        if (usr.username === "user") {
+            navigate('/', { replace: true });
+        }
 
-        if (response === 2) {
-            navigate('/dashboard/routes2', { replace: true });
-        } else if (response === 3) {
+        if (usr.username === "admin") {
             navigate('/dashboard/routes3', { replace: true });
-        } else {
-            setIsLoggedIn(true);
-            onLogin();
         }
     };
 
@@ -44,7 +44,7 @@ export default function LoginForm({ onLogin }) {
     return (
         <>
             <Stack spacing={3}>
-                <TextField name="email" label="Email address" />
+                <TextField name="username" label="username" onChange={u=>setUsr({...usr,username: u.target.value})}/>
                 <TextField
                     name="password"
                     label="Password"
@@ -58,6 +58,7 @@ export default function LoginForm({ onLogin }) {
                             </InputAdornment>
                         ),
                     }}
+                    onChange={p=>setUsr({...usr,password: p.target.value})}
                 />
             </Stack>
 
@@ -68,9 +69,11 @@ export default function LoginForm({ onLogin }) {
                 </Link>
             </Stack>
 
-            <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
-                登录
-            </LoadingButton>
+            <UserContext.Provider value={usr.username}>
+                <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
+                    登录
+                </LoadingButton>
+            </UserContext.Provider>
         </>
     );
 }
