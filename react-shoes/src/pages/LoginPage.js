@@ -64,7 +64,7 @@ export default function LoginPage() {
   return (
       <>
         <Helmet>
-          <title>越越の奇妙鞋城登录界面</title>
+          <title>鞋城登录界面</title>
         </Helmet>
 
         <StyledRoot>
@@ -85,7 +85,7 @@ export default function LoginPage() {
               {!showSignup && ( // 在showSignup为false时显示
                 <>
                   <Typography variant="h4" gutterBottom>
-                    <h1>越越の奇妙鞋城</h1>
+                    <h1>鞋城</h1>
                   </Typography>
                 </>
             )}

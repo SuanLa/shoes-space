@@ -39,12 +39,12 @@ export default function ProductsPage2() {
   return (
     <>
       <Helmet>
-        <title> 越越の奇妙鞋城 </title>
+        <title> 鞋城 </title>
       </Helmet>
 
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          以下是越越の奇妙鞋城的所有商品展示
+          以下是鞋城的所有商品展示
         </Typography>
           <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 5 }}>
               <Stack direction="row" spacing={3} sx={{ my: 1 }}>
