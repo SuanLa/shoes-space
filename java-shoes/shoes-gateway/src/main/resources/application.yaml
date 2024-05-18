@@ -1,5 +1,7 @@
 server:
   port: ${sp.gateway}
+  shutdown: graceful
+#  优雅停机
 spring:
   application:
     name: ${sn.gateway}

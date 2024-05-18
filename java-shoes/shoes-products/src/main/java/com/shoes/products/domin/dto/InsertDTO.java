@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -16,10 +15,9 @@ import lombok.ToString;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @ApiModel("添加一个商品信息")
-public class insertDTO {
+public class InsertDTO {
     @ApiModelProperty(value = "商品名称", required = true)
     private String productName;//商品名称
     @ApiModelProperty(value = "商品描述", required = true)

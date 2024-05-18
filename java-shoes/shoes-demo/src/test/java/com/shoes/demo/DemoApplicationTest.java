@@ -13,17 +13,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DemoApplicationTest {
     @Test
     public void test(){
-        //参数1为终端ID
-        //参数2为数据中心ID
-//        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
-//        long id = snowflake.nextId();
-//
+
+        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+        long id = snowflake.nextId();
+
 //        System.out.println(id);
-//简单使用
 //        long id = IdUtil.getSnowflakeNextId();
 
 //        String id = IdUtil.getSnowflakeNextIdStr();
-//        System.out.println(id);
+        System.out.println(id);
 
     }
 }

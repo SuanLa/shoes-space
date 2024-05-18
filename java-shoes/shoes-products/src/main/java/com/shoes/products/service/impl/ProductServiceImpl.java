@@ -1,24 +1,22 @@
 package com.shoes.products.service.impl;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shoes.products.domin.dto.deleteDTO;
-import com.shoes.products.domin.dto.insertDTO;
+import com.shoes.products.domin.dto.InsertDTO;
 import com.shoes.products.domin.dto.updateDTO;
 import com.shoes.products.domin.query.QueryAllPage;
 import com.shoes.products.domin.query.QueryById;
 import com.shoes.products.domin.vo.productVO;
-import com.shoes.products.entity.product;
+import com.shoes.products.entity.ProductsEntity;
 import com.shoes.products.mapper.productMapper;
 import com.shoes.products.service.ProductService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,16 +29,22 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
-@Transactional(rollbackFor = RuntimeException.class)
 public class ProductServiceImpl implements ProductService {
     @Autowired
-    productMapper productMapper;
+    private RedisTemplate<Object, Object> redisTemplate;
 
+    @Autowired
+    private productMapper productMapper;
 
-    @CachePut(value = "product" )
-    public productVO insertProduct(@NotNull insertDTO insertDTO) {
-        product product = new product();
+    @Autowired
+    private Snowflake snowflake;
+
+    @Override
+    public productVO insertProduct(@NotNull InsertDTO insertDTO) {
+        ProductsEntity product = new ProductsEntity();
         //productId是通过雪花算法实现
+        String id = IdUtil.getSnowflakeNextIdStr();
+        product.setProductId(id);
         product.setProductName(insertDTO.getProductName());
         product.setProductDescription(insertDTO.getProductDescription());
         product.setProductPrice(insertDTO.getProductPrice());
@@ -48,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductImg(insertDTO.getProductImg());
         int flag = productMapper.insert(product);
         if (flag == 1) {//插入成功
-            product productTemp = productMapper.selectById(product.getProductId());
+            ProductsEntity productTemp = productMapper.selectById(product.getProductId());
             productVO productVO = new productVO();
             BeanUtils.copyProperties(productTemp, productVO);
             return productVO;
@@ -56,19 +60,18 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
-
-    @CacheEvict(value = "product" )
+    @Override
     public String delete(@NotNull deleteDTO deleteDTO) {
         int flag = productMapper.deleteById(deleteDTO.getProductId());
         String temp = null;
         if (flag == 1) {
             temp = "删除成功";
             return temp;
-        } else
-            return null;
+        }
+        return null;
     }
 
-    @CachePut(value = "product" )
+    @Override
     public productVO update(updateDTO updateDTO) {
         product product = new product();
         BeanUtils.copyProperties(updateDTO, product);
@@ -82,11 +85,11 @@ public class ProductServiceImpl implements ProductService {
             productTemp = productMapper.selectById(product.getProductId());
             BeanUtils.copyProperties(productTemp, productVO);
             return productVO;
-        } else
-            return null;
+        }
+        return null;
     }
 
-    @CachePut(value = "product" )
+    @Override
     public List<productVO> updateBatch(List<updateDTO> updateDTOList) {
         int count = 0;
         for (updateDTO updateDTO : updateDTOList) {
@@ -107,12 +110,11 @@ public class ProductServiceImpl implements ProductService {
                 productVOList.add(productVOTemp);
             }
             return productVOList;
-        } else
-            return null;
+        }
+        return null;
     }
 
-
-    @CachePut(value = "product" )
+    @Override
     public productVO recover(QueryById queryById) {
         /**
          * 逻辑恢复，
@@ -129,12 +131,12 @@ public class ProductServiceImpl implements ProductService {
             product product = productMapper.selectOne(queryWrapper);
             BeanUtils.copyProperties(product, productVO);
             return productVO;
-        } else
-            return null;
+        }
+        return null;
     }
 
 
-    @Cacheable(value = "product" )
+    @Override
     public Page<productVO> getProductsAll(QueryAllPage queryAllPage) {
         QueryWrapper<product> queryWrapper = new QueryWrapper<>();
         if (queryAllPage != null) {
@@ -153,7 +155,7 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
-    @Cacheable(value = "product" )
+    @Override
     public Page<productVO> getDeleteProducts(QueryAllPage queryAllPage) {
         List<product> productList;
         if (queryAllPage.getOrder() != null && (queryAllPage.getOrder().equals("DESC") ||
@@ -170,17 +172,19 @@ public class ProductServiceImpl implements ProductService {
             Page<productVO> productVOIPage = new Page<>();
             BeanUtils.copyProperties(page, productVOIPage);
             return productVOIPage;
-        } else return null;
+        }
+        return null;
     }
 
-    @Cacheable(value = "product" )
+    @Override
     public productVO getProduct(QueryById queryById) {
         product product = productMapper.selectById(queryById);
         productVO productVO = new productVO();
         if (product != null) {
             BeanUtils.copyProperties(product, productVO);
             return productVO;
-        } else
-            return null;
+        }
+
+        return null;
     }
 }

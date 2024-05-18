@@ -34,12 +34,11 @@ import java.util.List;
 @Tag(name = "商品模块", description = "实现对商品的增删改查")
 @RestController
 @RequestMapping("/product")
-public class controller implements Apis {
+public class ProductsController implements Apis {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private RedisTemplate<String ,Object> redisTemplate;
-    ObjectMapper objectMapper;
+
+
 
     @Override
     @PostMapping("/product")//添加一个产品

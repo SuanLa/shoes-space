@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+
 /**
  * @Author: Tomcat
  * @Date: 2023/7/8
@@ -19,10 +21,9 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginMapper loginMapper;
 
-    @Autowired
-    private RedisTemplate<String,String> redisTemplate;
     @Override
     public LoginEntity loginSrv(LoginDTO login) {
+
         return loginMapper.selectById(login.getUsername());
     }
 

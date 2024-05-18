@@ -41,13 +41,13 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
     @Override
     public PageVO<Page<ElasticSearchVO>> queryPage(ElasticSearchPageQuery pageQuery) {
         Page<ElasticSearchEntity> page = mapper.findAll(Pageable.ofSize(pageQuery.getPageNumber()));
-        return PageVO.restPage(Convert.convert(Page.class,page));
+        return PageVO.restPage(Convert.convert(Page.class, page));
     }
 
     @Override
     public ElasticSearchVO update(ElasticSearchDTO dto) {
         ElasticSearchEntity update = mapper.save(Convert.convert(ElasticSearchEntity.class, dto));
-        return Convert.convert(ElasticSearchVO.class,update);
+        return Convert.convert(ElasticSearchVO.class, update);
     }
 
     @Override

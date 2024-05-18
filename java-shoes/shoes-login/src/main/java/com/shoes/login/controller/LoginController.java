@@ -46,10 +46,10 @@ public class LoginController implements LoginApis {
         LoginEntity loginEntity = service.loginSrv(loginDTO);
         if (loginEntity.getPasswd().equals(loginDTO.getPassword())){
             LoginVO loginVO = new LoginVO(loginEntity.getRoleName(), null);
-            long id = IdUtil.getSnowflake(1, 1).nextId();
-            String token = JWTUtil.getToken(new TokenEntity("login", System.currentTimeMillis(), System.currentTimeMillis() + 1000L, String.valueOf(id), loginEntity.getUsername()));
+            String id = IdUtil.getSnowflakeNextIdStr();
+            String token = JWTUtil.getToken(new TokenEntity("login", System.currentTimeMillis(), System.currentTimeMillis() + 1000L, id, loginEntity.getUsername()));
             loginVO.setToken(token);
-            redisTemplate.opsForValue().set(loginEntity.getUsername(),token, Duration.ofMinutes(3));
+            redisTemplate.opsForValue().set(loginDTO.getUsername(),token, Duration.ofMinutes(3));
             return ResultVO.success(loginVO);
         }else {
             return ResultVO.failed("密码错误");

@@ -1,5 +1,6 @@
 server:
   port: ${sp.demo}
+  shutdown: graceful
 spring:
   application:
     name: ${sn.demo}

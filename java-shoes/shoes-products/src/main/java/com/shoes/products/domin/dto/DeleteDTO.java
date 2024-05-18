@@ -19,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @ApiModel("通过id删除一个商品信息")
-public class deleteDTO {
+public class DeleteDTO {
     @ApiModelProperty(value = "商品ID",required = true)
     private String productId;//商品ID
 }
